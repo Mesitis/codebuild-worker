@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 curl -LO https://github.com/rancher/cli/releases/download/v2.0.0/rancher-linux-amd64-v2.0.0.tar.gz
