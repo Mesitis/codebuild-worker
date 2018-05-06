@@ -20,6 +20,7 @@ if [ -z "RANCHER_CREDENTIALS" ]
 then
     echo "Rancher credentials missing. Skipping k8s deployment."
 else
+    mkdir -p ~/.rancher
     $(echo ${RANCHER_CREDENTIALS} | base64 --decode) > ~/.rancher/cli2.json
     for i in ${DEPLOYMENTS//,/ }
     do
