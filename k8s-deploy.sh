@@ -2,15 +2,19 @@
 
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
+mkdir -p ~/bin
+sudo mv ./kubectl ~/bin/
 curl -LO https://github.com/rancher/cli/releases/download/v2.0.0/rancher-linux-amd64-v2.0.0.tar.gz
 tar -xvzf rancher-linux-amd64-v2.0.0.tar.gz
-mv -f rancher-v2.0.0/rancher /usr/local/bin/
-chmod +x /usr/local/bin/rancher && rm -rf ./rancher-v2.0.0
-rm -rf rancher-v2.0.0
+chmod +x rancher-v2.0.0/rancher
+mv -f rancher-v2.0.0/rancher ~/bin/
+rm -rf ./rancher-v2.0.0
+
+PATH="$(eval echo ~)/bin:$PATH"
 
 if [[ -z "${BRANCH}" ]]; then
   RANCHER_CREDENTIALS=${RANCHER_CREDENTIALS}
+  exit 1;
 else
   RANCHER_CREDENTIALS=$(echo "RANCHER_CREDENTIALS_${BRANCH//-/_}");
   RANCHER_CREDENTIALS=${!RANCHER_CREDENTIALS}
