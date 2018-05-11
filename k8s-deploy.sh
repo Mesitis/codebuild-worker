@@ -25,7 +25,7 @@ then
     echo "Rancher credentials missing. Skipping k8s deployment."
 else
     mkdir -p ~/.rancher
-    echo $(echo ${RANCHER_CREDENTIALS} | base64 --decode) > ~/.rancher/cli2.json
+    echo $(echo ${RANCHER_CREDENTIALS} | base64 -d) > ~/.rancher/cli2.json
     for i in ${DEPLOYMENTS//,/ }
     do
         rancher kubectl patch deployment ${i} -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"updated-at\":\"`date +'%s'`\"}}}}}" --namespace=${NAMESPACE}
