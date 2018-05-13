@@ -14,7 +14,7 @@ PATH="$(eval echo ~)/bin:$PATH"
 
 if [[ -z "${BRANCH}" ]]; then
   RANCHER_CREDENTIALS=${RANCHER_CREDENTIALS}
-  exit 1;
+  [ -z "$SKIP_EXIT" ] && exit 1;
 else
   RANCHER_CREDENTIALS=$(echo "RANCHER_CREDENTIALS_${BRANCH//-/_}");
   RANCHER_CREDENTIALS=${!RANCHER_CREDENTIALS}
