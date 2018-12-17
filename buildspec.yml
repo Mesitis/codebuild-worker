@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region ap-southeast-1)
+      - echo "Pulling source image from $SOURCE_IMAGE"
+      - docker pull $SOURCE_IMAGE
+      - docker tag $SOURCE_IMAGE $DESTINATION_IMAGE
+  post_build:
+    commands:
+      - echo "Pushing to destination $DESTINATION_IMAGE"
+      - docker push $DESTINATION_IMAGE
